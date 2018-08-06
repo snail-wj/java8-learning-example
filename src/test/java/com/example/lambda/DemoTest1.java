@@ -1,4 +1,4 @@
-package com.example.example.demo1;
+package com.example.lambda;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author WJ
@@ -30,6 +29,7 @@ public class DemoTest1 {
         Apple apple4 = new Apple(3, "荔枝", new BigDecimal("9.99"), 40);
 
         appleList = Arrays.asList(apple1, apple2, apple3, apple4);
+
     }
 
     /**

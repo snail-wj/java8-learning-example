@@ -1,4 +1,4 @@
-package com.example.example.demo1;
+package com.example.lambda;
 
 import lombok.Data;
 
