@@ -95,14 +95,5 @@ public class DemoTest1 {
         System.out.println(collect);
     }
 
-    /**
-     * 数组去重
-     */
-    @Test
-    public void distinctTest(){
-        String[] strings = {"a", "b", "c", "b", null};
-        List<String> strings1 = Arrays.stream(strings).filter(Objects::nonNull).map(String::trim).distinct().collect(Collectors.toList());
-        System.out.println(strings1);
 
-    }
 }
