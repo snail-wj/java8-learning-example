@@ -1,5 +1,6 @@
 package com.example.lambda;
 
+import lombok.val;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author WJ
@@ -93,6 +96,18 @@ public class DemoTest1 {
     public void groupBy2Test(){
         Map<String, List<BigDecimal>> collect = appleList.stream().collect(Collectors.groupingBy(Apple::getName, Collectors.mapping(Apple::getMoney, Collectors.toList())));
         System.out.println(collect);
+    }
+
+    /**
+     * 获取某一属性
+     */
+    @Test
+    public void propertyName(){
+        List<String> list1 = appleList.stream().map(Apple::getName).collect(Collectors.toList());
+        System.out.println(list1);
+        //去重操作
+        List<String> list2 = appleList.stream().map(Apple::getName).filter(Objects::nonNull).distinct().collect(Collectors.toList());
+        System.out.println(list2);
     }
 
 
