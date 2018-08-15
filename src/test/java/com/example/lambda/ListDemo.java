@@ -21,7 +21,7 @@ import static java.util.stream.Collectors.toList;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DemoTest1 {
+public class ListDemo {
 
     private static List<Apple> appleList;
 

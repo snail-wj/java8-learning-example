@@ -1,7 +1,9 @@
 package com.example.lambda;
 
+import lombok.val;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -46,6 +48,37 @@ public class MapDemo {
                 .collect(Collectors.toList());
 
         System.out.println(studentList);
+
+    }
+
+    /**
+     * 分别对k,v进行操作
+     */
+    @Test
+    public void test3(){
+        HashMap<Long, String> map = new HashMap<>();
+        map.put(1L, "ABC");
+        map.put(2L, "KK");
+        map.put(3L, "LV");
+        map.forEach((k,v) -> System.out.println(k + "=" + v));
+    }
+
+    /**
+     * 对map里面的value做操作
+     */
+    @Test
+    public void test4(){
+        List<String> list = Arrays.asList("2", "4");
+        val realList = new ArrayList<>();
+        HashMap<Long, List<String>> map = new HashMap<>();
+        map.put(1L,Arrays.asList("1", "2"));
+        map.put(2L,Arrays.asList("1", "2", "3"));
+        map.put(3L,Arrays.asList("1", "2", "3", "4"));
+        map.put(4L,Arrays.asList("1", "2", "3", "4"));
+        map.forEach((k,v) ->{
+            List<String> collect = v.stream().distinct().filter(str -> !list.contains(str)).collect(Collectors.toList());
+            System.out.println(k + ":" + collect);
+        });
 
     }
 }
