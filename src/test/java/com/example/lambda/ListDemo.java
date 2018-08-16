@@ -131,5 +131,11 @@ public class ListDemo {
         System.out.println(teacher);
     }
 
+    @Test
+    public void testListByFirst(){
+        Optional<Apple> first = appleList.stream().findFirst();
+        System.out.println(first.get().getName());
+    }
+
 
 }
