@@ -7,11 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -108,6 +106,29 @@ public class ListDemo {
         //去重操作
         List<String> list2 = appleList.stream().map(Apple::getName).filter(Objects::nonNull).distinct().collect(Collectors.toList());
         System.out.println(list2);
+    }
+
+
+    /**
+     * Collections.singletonList的用法
+     */
+    @Test
+    public void testSingleton(){
+        List<String> list = Collections.singletonList("a");
+        //会报错，singletonList方法返回一个不可变的集合包含指定对象
+//        list.add("b");
+        System.out.println(list);
+    }
+
+    /**
+     * 多个map的操作
+     */
+    @Test
+    public void testMultiMap(){
+        List<String> list = Arrays.asList("student1", "student2", "student3");
+        List<Teacher> teacher = list.stream().map(name -> new Student(name))
+                .map(student -> new Teacher("teacher", Arrays.asList(student))).collect(Collectors.toList());
+        System.out.println(teacher);
     }
 
 

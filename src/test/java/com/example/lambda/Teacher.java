@@ -1,6 +1,7 @@
 package com.example.lambda;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @date 2018/8/6
  */
 @Data
+@ToString
 public class Teacher {
 
     public String name;
