@@ -4,6 +4,7 @@ import lombok.val;
 import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -112,4 +113,15 @@ public class CompletableFutureDemo {
             return "现成的蛋糕";
         });
     }
+
+    /**
+     * 如果使用completeExceptionally(Throwable ex)则抛出一个异常，而不是一个成功的结果
+     */
+    @Test
+    public void testCompleteExceptionally() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "hello");
+        future.completeExceptionally(new Exception("exception发生于 completeExceptionally"));
+        System.out.println(future.get());
+    }
+
 }
