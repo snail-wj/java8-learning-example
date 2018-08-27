@@ -38,13 +38,23 @@ public class CollectionTest {
         smap.put("2", 22);
 
         //1.8 以前
+        List<Map.Entry<String, Integer>> list1 = new ArrayList<>();
+        list1.addAll(smap.entrySet());
+        Collections.sort(list1, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o1.getValue() - o2.getValue();
+            }
+        });
+        for (Map.Entry<String, Integer> entry : list1) {
+            System.out.println("key:" + entry.getKey() + ",value:" + entry.getValue());
+        }
 
         //1.8 使用Lambda 表达式
-        List<Map.Entry<String ,Integer>> list2 = new ArrayList<>();
-        list2.addAll(smap.entrySet());
-        list2.sort(((o1, o2) -> o1.getValue() - o2.getValue() ));
-        list2.forEach(entry ->{
-            System.out.println("key:" + entry.getKey() + ",value:" + entry.getValue());
-        });
+        List<Map.Entry<String, Integer>> list2 = new ArrayList<>(smap.entrySet());
+        list2.sort(Comparator.comparing(Map.Entry::getValue));
+        list2.forEach(entry ->
+                System.out.println("key:" + entry.getKey() + ",value:" + entry.getValue())
+        );
     }
 }
