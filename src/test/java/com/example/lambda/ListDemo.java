@@ -1,17 +1,17 @@
-package com.example.example.demo1;
+package com.example.lambda;
 
+import lombok.val;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author WJ
@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DemoTest1 {
+public class ListDemo {
 
     private static List<Apple> appleList;
 
@@ -30,6 +30,7 @@ public class DemoTest1 {
         Apple apple4 = new Apple(3, "荔枝", new BigDecimal("9.99"), 40);
 
         appleList = Arrays.asList(apple1, apple2, apple3, apple4);
+
     }
 
     /**
@@ -93,6 +94,47 @@ public class DemoTest1 {
     public void groupBy2Test(){
         Map<String, List<BigDecimal>> collect = appleList.stream().collect(Collectors.groupingBy(Apple::getName, Collectors.mapping(Apple::getMoney, Collectors.toList())));
         System.out.println(collect);
+    }
+
+    /**
+     * 获取某一属性
+     */
+    @Test
+    public void propertyName(){
+        List<String> list1 = appleList.stream().map(Apple::getName).collect(Collectors.toList());
+        System.out.println(list1);
+        //去重操作
+        List<String> list2 = appleList.stream().map(Apple::getName).filter(Objects::nonNull).distinct().collect(Collectors.toList());
+        System.out.println(list2);
+    }
+
+
+    /**
+     * Collections.singletonList的用法
+     */
+    @Test
+    public void testSingleton(){
+        List<String> list = Collections.singletonList("a");
+        //会报错，singletonList方法返回一个不可变的集合包含指定对象
+//        list.add("b");
+        System.out.println(list);
+    }
+
+    /**
+     * 多个map的操作
+     */
+    @Test
+    public void testMultiMap(){
+        List<String> list = Arrays.asList("student1", "student2", "student3");
+        List<Teacher> teacher = list.stream().map(name -> new Student(name))
+                .map(student -> new Teacher("teacher", Arrays.asList(student))).collect(Collectors.toList());
+        System.out.println(teacher);
+    }
+
+    @Test
+    public void testListByFirst(){
+        Optional<Apple> first = appleList.stream().findFirst();
+        System.out.println(first.get().getName());
     }
 
 
