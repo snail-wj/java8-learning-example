@@ -58,9 +58,9 @@ public class ListDemo {
      */
     @Test
     public void filterTest() {
-        List<Apple> filterList = appleList.stream().filter(a -> a.getName().equals("香蕉")).collect(Collectors.toList());
+        List<Apple> filterList = appleList.stream().filter(a -> a.getName().equals("香蕉123")).collect(Collectors.toList());
         List<Apple> filterList2 = appleList.stream().filter(a -> a.getId() == 1).collect(Collectors.toList());
-        System.out.println(filterList);
+        System.out.println(filterList.size());
         System.out.println(filterList2);
         System.out.println(appleList);
     }
@@ -106,6 +106,9 @@ public class ListDemo {
         //去重操作
         List<String> list2 = appleList.stream().map(Apple::getName).filter(Objects::nonNull).distinct().collect(Collectors.toList());
         System.out.println(list2);
+        //字符转变操作
+        List<String> list3 = appleList.stream().map(apple -> apple.getName()).collect(Collectors.toList());
+        System.out.println(list3);
     }
 
 
